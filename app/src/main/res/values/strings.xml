@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">ims</string>
+    <string name="app_name">微库</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="menu_stock_manage">库存管理</string>
+    <string name="menu_order_manage">订单管理</string>
 </resources>
