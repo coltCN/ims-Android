@@ -14,11 +14,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.coltcn.ims.R;
+import com.coltcn.ims.ui.Fragment.StockListFragment;
 import com.coltcn.ims.ui.base.BaseActivity;
 import com.coltcn.ims.utils.L;
 
 public class MainActivity extends AppCompatActivity {
 
+    private StockListFragment stockListFragment;
     private DrawerLayout mDrawerLayout;
     private ActionBar ab;
 
@@ -81,37 +83,44 @@ public class MainActivity extends AppCompatActivity {
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
-        //selectFragment(R.id.nav_user_china);
+        selectFragment(R.id.nav_stock_manage);
 
     }
 
-    /*private void selectFragment(int fragmentId) {
+    private void selectFragment(int fragmentId) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         hideAllFragment(transaction);
         switch (fragmentId) {
-            case R.id.nav_user_china:
-                if (hotUsersFragment == null) {
-                    hotUsersFragment = new HotUsersFragment();
-                    ab.setTitle("Hot users");
-                    transaction.add(R.id.id_main_frame_container, hotUsersFragment, "hotUser");
+            case R.id.nav_stock_manage:
+                if (stockListFragment == null) {
+                    stockListFragment = new StockListFragment();
+                    ab.setTitle("库存管理");
+                    transaction.add(R.id.id_main_frame_container, stockListFragment,"库存管理");
                 } else {
-                    transaction.show(hotUsersFragment);
+                    transaction.show(stockListFragment);
                 }
                 break;
 
-            case R.id.nav_repositories:
-                if (hotReposFragment == null) {
+            case R.id.nav_order_manage:
+              /*  if (hotReposFragment == null) {
                     hotReposFragment = new HotReposFragment();
                     ab.setTitle("Hot Repositories");
                     transaction.add(R.id.id_main_frame_container, hotReposFragment, "hotRepos");
                 } else {
                     transaction.show(hotReposFragment);
-                }
+                }*/
                 break;
         }
         transaction.commit();
-    }*/
+    }
+
+    private void hideAllFragment(FragmentTransaction transaction) {
+        if (stockListFragment != null) {
+            transaction.hide(stockListFragment);
+        }
+
+    }
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
