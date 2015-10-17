@@ -3,10 +3,10 @@
     <!-- Base application theme. -->
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimary">#0080FF</item>
 
-        <item name="colorPrimaryDark">#388E3C</item>
-        <item name="colorAccent">#388E3C</item>
+        <item name="colorPrimaryDark">#0075EA</item>
+        <item name="colorAccent">#FF4081</item>
 
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>

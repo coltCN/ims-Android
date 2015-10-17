@@ -46,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorPrimary"
                 android:id="@+id/item_stock_price" />
 
             <TextView
@@ -53,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="?android:attr/textColorPrimary"
                 android:text="数量：" />
 
             <TextView
@@ -61,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorPrimary"
                 android:id="@+id/item_stock_quantity" />
         </LinearLayout>
 
