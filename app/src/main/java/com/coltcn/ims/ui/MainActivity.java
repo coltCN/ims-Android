@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.coltcn.ims.R;
+import com.coltcn.ims.ui.Fragment.OrderListFragment;
 import com.coltcn.ims.ui.Fragment.StockListFragment;
 import com.coltcn.ims.ui.base.BaseActivity;
 import com.coltcn.ims.utils.L;
@@ -21,6 +22,7 @@ import com.coltcn.ims.utils.L;
 public class MainActivity extends AppCompatActivity {
 
     private StockListFragment stockListFragment;
+    private OrderListFragment orderListFragment;
     private DrawerLayout mDrawerLayout;
     private ActionBar ab;
 
@@ -103,13 +105,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_order_manage:
-              /*  if (hotReposFragment == null) {
-                    hotReposFragment = new HotReposFragment();
-                    ab.setTitle("Hot Repositories");
-                    transaction.add(R.id.id_main_frame_container, hotReposFragment, "hotRepos");
+                if (orderListFragment == null) {
+                    orderListFragment = new OrderListFragment();
+                    ab.setTitle("订单管理");
+                    transaction.add(R.id.id_main_frame_container, orderListFragment, "订单管理");
                 } else {
-                    transaction.show(hotReposFragment);
-                }*/
+                    transaction.show(orderListFragment);
+                }
                 break;
         }
         transaction.commit();
@@ -120,6 +122,10 @@ public class MainActivity extends AppCompatActivity {
             transaction.hide(stockListFragment);
         }
 
+        if (orderListFragment != null) {
+            transaction.hide(orderListFragment);
+        }
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -128,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         mDrawerLayout.closeDrawers();
-                        //selectFragment(menuItem.getItemId());
+                        selectFragment(menuItem.getItemId());
                         return true;
                     }
                 });

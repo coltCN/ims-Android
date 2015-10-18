@@ -10,52 +10,55 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.coltcn.ims.R;
-import com.coltcn.ims.adapter.StockListAdapterHolder;
+import com.coltcn.ims.adapter.OrderListAdapterHolder;
+import com.coltcn.ims.pojo.Order;
 import com.coltcn.ims.pojo.Stock;
 import com.coltcn.ims.ui.base.BaseFragment;
-import com.coltcn.ims.ui.custom.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by majf on 2015/10/16.
+ * Created by majfc on 2015/10/18.
  */
-public class StockListFragment extends BaseFragment {
+public class OrderListFragment extends BaseFragment {
 
     RecyclerView recyclerView;
-
-    private List<Stock> stocks = new ArrayList<>();
-    private StockListAdapterHolder stockAdapter;
+    private List<Order> orders ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fatchData();
+        fetchData();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_stock_list,container,false);
+        View view = inflater.inflate(R.layout.fragment_stock_list, container, false);
         initView(view);
+        view.setBackgroundColor(getResources().getColor(R.color.ligth_gray));
         return view;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-    }
-
-    public void fatchData(){
-        for (int i=0; i<30;i++) {
+    private void fetchData(){
+        orders = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Order order = new Order();
+            order.setAddress("广东佛山XXXXXXXXXXXXXXXX");
+            order.setBuyer("张" + (i + 1));
+            order.setOrderNo("201510102500" + i);
+            List<Stock> stocks = new ArrayList<>();
             Stock stock = new Stock();
-            stock.setId(String.valueOf(i));
-            stock.setName("货物" + i);
-            stock.setPrice(200.0 - i * 3);
-            stock.setQuantity(i*5);
+            stock.setName("货物1");
+            stock.setQuantity(2);
             stocks.add(stock);
+            stock = new Stock();
+            stock.setName("货物4");
+            stock.setQuantity(1);
+            stocks.add(stock);
+            order.setStocks(stocks);
+            orders.add(order);
         }
     }
 
@@ -64,7 +67,8 @@ public class StockListFragment extends BaseFragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        stockAdapter = new StockListAdapterHolder(stocks);
-        recyclerView.setAdapter(stockAdapter);
+        OrderListAdapterHolder adapterHolder = new OrderListAdapterHolder(orders);
+        recyclerView.setAdapter(adapterHolder);
+
     }
 }

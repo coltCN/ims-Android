@@ -1,12 +1,12 @@
-package com.coltcn.ims;
+package com.coltcn.ims.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.coltcn.ims.R;
 import com.coltcn.ims.pojo.Stock;
 
 import java.util.List;
@@ -16,17 +16,15 @@ import java.util.List;
  */
 public class StockListAdapterHolder extends RecyclerView.Adapter<StockListAdapterHolder.ViewHoder> {
 
-    private Context context;
     private List<Stock> stocks;
 
-    public StockListAdapterHolder(Context context,List<Stock> stocks) {
-        this.context = context;
+    public StockListAdapterHolder(List<Stock> stocks) {
         this.stocks=stocks;
     }
 
     @Override
     public ViewHoder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        final LayoutInflater inflater = LayoutInflater.from(context);
+        final LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         final View view = inflater.inflate(R.layout.stock_list_item,viewGroup,false);
         return new ViewHoder(view);
     }
@@ -41,6 +39,7 @@ public class StockListAdapterHolder extends RecyclerView.Adapter<StockListAdapte
 
     @Override
     public int getItemCount() {
+        if (stocks == null) return 0;
         return stocks.size();
     }
 

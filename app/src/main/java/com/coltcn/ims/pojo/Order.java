@@ -7,9 +7,18 @@ import java.util.List;
  */
 public class Order {
     private String id;
+    private String orderNo;
     private String buyer;
     private String address;
     private List<Stock> stocks;
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
 
     public String getId() {
         return id;
