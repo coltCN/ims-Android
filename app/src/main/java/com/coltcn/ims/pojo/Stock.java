@@ -1,9 +1,11 @@
 package com.coltcn.ims.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by majf on 2015/10/16.
  */
-public class Stock {
+public class Stock implements Serializable{
     private String id;
     private String name;
     private Double price;
