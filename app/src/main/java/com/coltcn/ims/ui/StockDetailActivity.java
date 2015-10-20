@@ -24,6 +24,10 @@ public class StockDetailActivity extends AppCompatActivity {
     private EditText priceEditor;
     private EditText quantityEditor;
 
+    private String opt;
+    private Stock stock;
+    private int listPosiston=-1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,20 +56,37 @@ public class StockDetailActivity extends AppCompatActivity {
                 String name = nameEditor.getText().toString();
                 Double parice = Double.parseDouble(priceEditor.getText().toString());
                 int quantity = Integer.parseInt(quantityEditor.getText().toString());
-                if(!"".equals(name) &&
-                        parice>0 &&
-                        quantity>0){
-                    Stock stock = new Stock();
-                    stock.setName(name);
+                if ("edit".equals(opt)){
                     stock.setPrice(parice);
                     stock.setQuantity(quantity);
+                }else {
+                    if (!"".equals(name) &&
+                            parice > 0 &&
+                            quantity > 0) {
+                        stock = new Stock();
+                        stock.setName(name);
+                        stock.setPrice(parice);
+                        stock.setQuantity(quantity);
+                    }
+                }
+                if (stock != null) {
                     Intent intent = new Intent();
-                    intent.putExtra("result",stock);
-                    StockDetailActivity.this.setResult(1,intent);
+                    intent.putExtra("result", stock);
+                    intent.putExtra("position", listPosiston);
+                    StockDetailActivity.this.setResult(1, intent);
                     StockDetailActivity.this.finish();
                 }
-
             }
         });
+
+        opt = this.getIntent().getStringExtra("opt");
+        if ("edit".equals(opt)){
+            stock = (Stock) this.getIntent().getSerializableExtra("stock");
+            nameEditor.setText(stock.getName());
+            nameEditor.setEnabled(false);
+            priceEditor.setText(String.valueOf(stock.getPrice()));
+            quantityEditor.setText(String.valueOf(stock.getQuantity()));
+            listPosiston = this.getIntent().getIntExtra("position",-1);
+        }
     }
 }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.coltcn.ims.R;
 import com.coltcn.ims.pojo.Stock;
+import com.coltcn.ims.utils.L;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  */
 public class StockListAdapterHolder extends RecyclerView.Adapter<StockListAdapterHolder.ViewHoder> {
 
+    OnItemClickListener listItemClickListener;
     private List<Stock> stocks;
 
     public StockListAdapterHolder(List<Stock> stocks) {
@@ -43,13 +45,31 @@ public class StockListAdapterHolder extends RecyclerView.Adapter<StockListAdapte
         return stocks.size();
     }
 
-    public class ViewHoder extends RecyclerView.ViewHolder {
+    public void setOnItemClickListener(final OnItemClickListener listener){
+        this.listItemClickListener=listener;
+    }
+
+
+    public class ViewHoder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nameView,priceView,quantityView;
         public ViewHoder(View itemView) {
             super(itemView);
             nameView = (TextView) itemView.findViewById(R.id.item_stock_name);
             priceView = (TextView) itemView.findViewById(R.id.item_stock_price);
             quantityView = (TextView) itemView.findViewById(R.id.item_stock_quantity);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (listItemClickListener != null){
+                L.i("adapterHolder onClick");
+                listItemClickListener.onItemClick(view,getLayoutPosition());
+            }
+        }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(View view,int position);
     }
 }

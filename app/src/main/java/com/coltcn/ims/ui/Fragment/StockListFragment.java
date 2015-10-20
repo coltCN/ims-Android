@@ -94,6 +94,19 @@ public class StockListFragment extends BaseFragment {
         stockAdapter = new StockListAdapterHolder(stocks);
         recyclerView.setAdapter(stockAdapter);
 
+        stockAdapter.setOnItemClickListener(new StockListAdapterHolder.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), StockDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("opt", "edit");
+                bundle.putSerializable("stock",stocks.get(position));
+                bundle.putInt("position",position);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 2);
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,8 +125,17 @@ public class StockListFragment extends BaseFragment {
         L.i(String.format("onActivityResult requestCode:%d,resultCode:%d",requestCode,resultCode));
         if (resultCode == 1){
             Stock stock = (Stock) data.getSerializableExtra("result");
-            stocks.add(0,stock);
-            stockAdapter.notifyDataSetChanged();
+            if (requestCode == 1) {
+                stocks.add(0, stock);
+                stockAdapter.notifyDataSetChanged();
+            }else if (requestCode == 2) {
+                int position = data.getIntExtra("position",-1);
+                if (position > -1) {
+                    stocks.remove(position);
+                    stocks.add(position,stock);
+                    stockAdapter.notifyDataSetChanged();
+                }
+            }
         }
     }
 }
