@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.coltcn.ims.R;
-import com.coltcn.ims.pojo.Stock;
+import com.coltcn.ims.dao.Stock;
 import com.coltcn.ims.utils.L;
 
 import java.util.List;

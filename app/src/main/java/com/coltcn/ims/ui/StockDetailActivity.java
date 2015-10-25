@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.coltcn.ims.R;
-import com.coltcn.ims.pojo.Stock;
+import com.coltcn.ims.dao.Stock;
 import com.coltcn.ims.utils.L;
 
 /**
